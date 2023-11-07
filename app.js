@@ -3,9 +3,9 @@ const app = express()
 const dotenv = require("dotenv")
 dotenv.config()
 const PORT = process.env.port
-
+const cors = require('cors')
 app.use(express.json())
-
+app.use(cors())
 const db = require('./backend/db/connection')
 db.sequelize.sync()
 .then(()=>{

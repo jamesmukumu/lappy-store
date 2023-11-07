@@ -26,11 +26,11 @@ try {
     const alllaptops = await laptop.findAll()
  if(!alllaptops){
 return res.status(200).json({error:"No laptops"})
- }   
+ }    
 
 
  else{
-    return res.status(200).json(alllaptops)
+    return res.status(200).json({message:"all laptops",data:alllaptops})
  }
 } catch (error) {
     return res.status(500).json({error})
@@ -113,7 +113,7 @@ if(resultsBasedonprice.length===0){
 return res.status(200).json({message:"No results based on your search"})
 }
 else{
-    return res.status(200).json(resultsBasedonprice)
+    return res.status(200).json({message:"laptops found",data:resultsBasedonprice})
 }
     
 } catch (error) {
@@ -132,7 +132,7 @@ try {
     return res.status(200).json({message:'No hp laptops'})
     }
     else{
-        return res.status(200).json(filterAllHp)
+        return res.status(200).json({message:"hp laptops found",data:filterAllHp})
     }
 } catch (error) {
 return res.status(500).json({error:`${error}`})    

@@ -1,0 +1,295 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+   background-color: whitesmoke;
+}
+.intro{
+    width: 100%;
+    height: 200px;
+  
+   text-align: center;
+}
+
+.laptops-container{
+   width: 500px;
+   height: 670px;
+   display: inline-block;
+   flex-wrap: wrap;
+   box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+   margin-left: 20px;
+   margin-top: 20px;
+}
+.laptops-card p{
+    padding-top: 10px;
+}
+.laptopdescription{
+    text-align: center;
+}
+.laptopdescription h1{
+    font-size: 23px;
+}
+.laptopdescription p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color:rgb(77, 73, 73);
+    font-weight: bold;
+}
+.checkout h1{
+    font-size: 23px;
+}
+.checkout span{
+    color: red;
+    font-size: 24px;
+}
+.checkout div{
+    margin-top: 30px;
+}
+.checkout i{
+    font-size: 20px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.checkout{
+    box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+    text-align: center;
+}
+.checkout p{
+    font-size: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.checkout h2 span{
+    color: green;
+    text-decoration: underline;
+}
+.checkout strike{
+    color: rgb(9, 6, 6);
+    font-weight: bolder;
+}
+.laptops-card h1{
+    color: blue;
+    font-size: 19px;
+    padding-top: 10px;
+}
+.laptops-card span{
+    color: blue;
+    font-size: 18px;
+}
+  
+.nav{
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+    
+}
+.categories ul{
+   text-align: center;
+}
+.categories ul li{
+    padding-top: 10px;
+    font: 20px;
+}
+.categories{
+  width: 100%;
+  height: 100px;
+  position: relative;
+  background-color: plum;
+}
+.categories i{
+    position: absolute;
+    right: 20px;
+    font-size: 22px;
+    top: 20px;
+    text-align: center;
+}
+.searchitem{
+    text-align: center;
+}
+.searchitem input{
+    width: 55%;
+    height: 40px;
+    border-radius: 20px;
+}
+.search-icon{
+    font-size: 22px;
+    margin-left: 10px;
+}
+.filterpricewise{
+    text-align: center;
+    margin-top: 18px;
+}
+.filterpricewise i{
+    margin-left: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.filterpricewise input{
+    width: 300px;
+    border-radius: 18px;
+    height: 20px;
+    
+}
+.results-laptop{
+    display: flex;
+    justify-content: center;
+    
+    background-color: beige;
+    margin-top: 20px;
+     box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+     width: 100%;
+    
+}
+.results-laptop div{
+    margin-left: 20px;
+}
+
+.alllaptopsdata{
+    background-color: beige;
+  margin-top: 20px;
+   box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+   display: inline-block;
+    margin-right: 20px;
+    text-align: center; 
+    cursor: pointer; 
+}
+.alllaptopsdata p{
+    padding-top: 20px;
+    color: black;
+}
+.alllaptopsdata span{
+ color: darkblue;
+}
+.alllaptopsdata strong{
+font-size: 19px;
+color: gray;
+}
+.alllaptopsdata h1{
+    font-size: 20px;
+    color: black;
+    font-weight: bolder;
+}
+.laptops-card strong{
+    color: red;
+}
+
+.laptops-card img{
+    width: 400px;
+    height: 300px;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:800px){
+
+    .laptops-container{
+        width: 100%;
+        height: 670px;
+        display: inline-block;
+        flex-wrap: wrap;
+     
+        margin-top: 20px;
+     }
+
+.searchitem input{
+    width: 300px;
+    border-radius: 18px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.categories i{
+    font-size: 30px;
+}
+.results-laptop{
+    background-color: beige;
+    margin-top: 20px;
+     box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
+     width: 100%;
+     flex-wrap: wrap;
+     flex-direction: column;
+     
+}
+.laptops-card img{
+    width: 100%;
+}
+}

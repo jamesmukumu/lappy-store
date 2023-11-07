@@ -14,9 +14,7 @@ async function fetchMacbookair(req, res) {
     if (!applelaptop) {
       return res.status(200).json({ message: "no laptop found" });
     } else {
-      return res
-        .status(200)
-        .json({ message: "apple found", data: applelaptop });
+      return res.status(200).json({ message: "apple found", data:applelaptop });
     }
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
@@ -36,7 +34,7 @@ async function fetchApplemacbookgoldprice(req, res) {
     if (!applemacbookgold) {
       return res.status(200).json({ message: "no laptop found" });
     } else {
-      return res.status(200).json({ data: price });
+      return res.status(200).json({message:"Prices fetched",data:price});
     }
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
