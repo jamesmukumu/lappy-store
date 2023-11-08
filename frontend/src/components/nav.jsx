@@ -223,6 +223,13 @@ return(
        </Link>
 
 
+
+       <Link to="/lenovo/laptops">
+       <li>
+        Lenovo Laptops ({Noofapplelaptops})
+        </li>
+       </Link>
+
     </ul>
 
 

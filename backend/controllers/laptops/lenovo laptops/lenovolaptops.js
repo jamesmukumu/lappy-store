@@ -32,7 +32,7 @@ async function fetchLenovoideapadprice(req, res) {
     if (!lenovoIdeapadlaptop) {
       return res.status(200).json({ message: "no laptop found" });
     } else {
-      return res.status(200).json({ data: price });
+      return res.status(200).json({message:"Prices fetched",data:price} );
     }
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
@@ -57,7 +57,7 @@ async function buyLenovoideapad(req, res) {
       }
     );
 
-    return res.status(200).json(response.data.url);
+    return res.status(200).json({message:"Url fetched",data:response.data.url});
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
   }

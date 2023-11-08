@@ -1,5 +1,6 @@
 import React from "react";
 import {BrowserRouter,Routes,Route} from "react-router-dom"
+import Lenovolaptops from "./components/categories/lenovo";
  import Navigationmenu from "./components/nav";
 import Macbookairgold from "./components/laptops/apple laptops/macbook air gold";
 import Registerclient from "./components/users/registration";
@@ -10,11 +11,13 @@ import Resetpassword from "./components/users/resetpass";
 import Macbookprom2 from "./components/laptops/apple laptops/macbook pro m2";
 import Applelaptops from "./components/categories/apple";
 import HpelitebookG2 from "./components/laptops/hp laptops/hpelitebookG2";
+import Lenovoideapad from "./components/laptops/lenovo laptops/lenovoideapad";
 function App(){
   return(
     <div>
      <BrowserRouter>
      <Routes>
+     <Route path="/lenovo/laptops" element={<Lenovolaptops/>}/>
      <Route path="/" element={<Navigationmenu/>}/> 
      <Route path="/apple/laptops" element={<Applelaptops/>}/>
       <Route path="/apple/mac book/pro/m2/2022" element={<Macbookprom2/>}/>
@@ -25,6 +28,7 @@ function App(){
       <Route path="/login/client" element={<Loginclient/>}/> 
       <Route path="/validate/recovery/email" element={<Validaterecoveryemail/>}/>  
       <Route path="/reset/password" element={<Resetpassword/>}/>   
+      <Route path="/lenovo/IDEAPAD S145-15IIL 10TH GEN" element={<Lenovoideapad/>}/>  
      </Routes>
      
      </BrowserRouter>

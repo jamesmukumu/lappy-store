@@ -148,7 +148,7 @@ async function filterLenovo(req,res){
         return res.status(200).json({message:'No lenovo laptops'})
         }
         else{
-            return res.status(200).json(filterAlllenovo)
+            return res.status(200).json({message:"Lenovo laptops fetched",data:filterAlllenovo})
         }
     } catch (error) {
     return res.status(500).json({error:`${error}`})    
