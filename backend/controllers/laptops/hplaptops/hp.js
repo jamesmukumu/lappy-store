@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 const axios = require("axios");
 const dotenv = require('dotenv')
 dotenv.config()
-// apple macbook details
+// hp macbook details
 
 async function fetchHPeliteBookG2(req, res) {
   try {
@@ -35,7 +35,7 @@ async function fetchHPeliteBookG2price(req, res) {
     if (!hpelitebook) {
       return res.status(200).json({ message: "no laptop found" });
     } else {
-      return res.status(200).json({ data: price });
+      return res.status(200).json({message:"Prices fetched",data:price});
     }
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
@@ -60,7 +60,7 @@ async function buyHpelitebook(req, res) {
       }
     );
 
-    return res.status(200).json(response.data.url);
+    return res.status(200).json({message:"Url fetched",data:response.data.url});
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
   }

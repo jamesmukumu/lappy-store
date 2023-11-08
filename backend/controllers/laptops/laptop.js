@@ -163,7 +163,7 @@ async function filterApple(req,res){
         return res.status(200).json({message:'No apple laptops'})
         }
         else{
-            return res.status(200).json(filterAllapple)
+            return res.status(200).json({message:"Apple laptops fetched",data:filterAllapple})
         }
     } catch (error) {
     return res.status(500).json({error:`${error}`})    

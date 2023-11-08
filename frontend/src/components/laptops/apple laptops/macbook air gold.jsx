@@ -3,21 +3,30 @@ import axios from "axios";
 import { VscThreeBars } from "react-icons/vsc";
 import {HiPlus} from "react-icons/hi"
 import {FaMinus} from "react-icons/fa"
+import Cookie from "js-cookie"
+import { useNavigate } from "react-router-dom";
+import Preloader from "../../../preloader";
 function Macbookairgold() {
+  const [loading,setLoading] = useState(false)
   const [Macbookairdata, setMacbookairdata] = useState([]);
   const [isVisible, setIsvisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
-  const [laptopPrice, setLaptopprice] = useState([]);
+  const [laptopPrice, setLaptopprice] = useState(null);
   const [quantity, setQuantity] = useState(1); 
   const [subTotal, setSubTotal] = useState(0); 
-
+ 
+ let navigate = useNavigate() 
+ const token = Cookie.get("access cookie")
   useEffect(() => {
     async function fetchMacbookairdata() {
+      setLoading(true)
       try {
         const response = await axios.get("http://localhost:7000/apple/macbookairgold");
         if (response.data.message === "apple found") {
+          setLoading(false)
           setMacbookairdata(response.data.data);
         }
+     
       } catch (error) {
         console.log(error);
       }
@@ -37,32 +46,75 @@ function Macbookairgold() {
   useEffect(() => {
     async function fetchMacbookairdataprice() {
       try {
-        const response = await axios.get("http://localhost:7000/apple/macbookairgold/price");
+        const response = await axios.get("http://localhost:7000/apple/macbookairgold/price",{
+          headers:{Authorization:token}
+        });
         if (response.data.message === "Prices fetched") {
           setLaptopprice(response.data.data);
-          const totalPrice = laptopPrice * quantity; // Calculate the total price
-          setSubTotal(totalPrice); // Update the subtotal
-        } else {
-          setLaptopprice([]);
+          const totalPrice = laptopPrice * quantity; 
+          setSubTotal(totalPrice); 
+        }
+        else if(response.data.message==="Unauthorized no token"){
+          navigate('/login/client')
+           }
+        
+        else {
+          setLaptopprice(null);
         }
       } catch (error) {
         console.log(error);
       }
     }
     fetchMacbookairdataprice();
-  }, [laptopPrice, quantity]);
+  },[token,quantity,laptopPrice]);
 
   // Function to increase quantity
   function increaseQuantity() {
     setQuantity(quantity + 1);
   }
 
-  // Function to decrease quantity (ensure quantity doesn't go below 1)
+  
   function decreaseQuantity() {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   }
+
+
+
+
+
+
+
+async function buyMacbookairgold(){
+  setLoading(true)
+try {
+  const response = await axios.post("http://localhost:7000/buy/applemacbookairgold",{
+Totals:subTotal,
+},
+{
+  headers: { Authorization: token }
+}
+)
+  
+
+if(response.data.message==="Url fetched"){
+  
+ console.log(response.data.data)
+ setTimeout(()=>{
+  window.location.href = response.data.data
+  setLoading(false)
+ },3000)
+}
+} catch (error) {
+  console.log(error)
+}}
+
+
+
+
+
+
 
   return (
     <div className="macbooksair">
@@ -82,6 +134,11 @@ function Macbookairgold() {
           <li>Apple Laptops</li>
         </ul>
       </div>
+
+
+
+      {loading?(<Preloader/>):(
+      
       <div className="results-laptop">
         <div className="laptops-card">
           <strong>{Macbookairdata.nameoflaptop}</strong>
@@ -156,8 +213,14 @@ function Macbookairgold() {
            
           </div>
           <h2>Sub Total: <span>{subTotal}</span></h2>
+          <button onClick={buyMacbookairgold}>Buy</button>
         </div>
       </div>
+      )}
+
+
+
+
     </div>
   );
 }

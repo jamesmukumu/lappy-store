@@ -3,9 +3,12 @@ import { useEffect,useState } from "react";
 import axios from "axios";
 import {FcSearch} from "react-icons/fc"
 import {VscThreeBars} from "react-icons/vsc"
-
-
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Preloader from "../preloader";
 function Navigationmenu(){
+    let navigate = useNavigate()
+    const [loading,setLoading] = useState(false)
 const [alllaptopsdata,setAlllaptopsdate] = useState([])
 const [searchTerm,setSearchterm] = useState('')
 const [filteredData,setFiltereddata] = useState([])
@@ -19,10 +22,12 @@ const  [isVisible,setIsvisible] = useState(false)
 const  [Noofapplelaptops,setNoofapplelaptops] = useState([])
 useEffect(()=>{
     async function fetchAllLaptops(){
+        setLoading(true)
         try {
         const response = await axios.get('http://localhost:7000/get/alllaptops')
         if(response.data.message==="all laptops"){
         setAlllaptopsdate(response.data.data)
+        setLoading(false)
         console.log("setlaptops",alllaptopsdata)
         }
         else if(response.data.error==="No laptops"){
@@ -43,6 +48,7 @@ useEffect(()=>{
 
 
 async function fetchLaptoponterm(){
+    setLoading(true)
 try {
 const response  = await axios.get('http://localhost:7000/filter/all',{
     params:{keySearchterm:searchTerm}
@@ -51,9 +57,11 @@ const response  = await axios.get('http://localhost:7000/filter/all',{
 
 
 if(response.data.message==="Laptops found"){
+    setLoading(false)
 setFiltereddata(response.data.data)
 }
 else if(response.data.message==="No results based on your search"){
+    setLoading(false)
 setNoresults("No results found based on your search")
 
 }
@@ -75,6 +83,7 @@ setNoresults("No results found based on your search")
 
 
 async function filterLaptopsonpricerange(){
+    setLoading(true)
 try {
 const response = await axios.get("http://localhost:7000/filter/pricewise",{
     params:{
@@ -87,9 +96,11 @@ const response = await axios.get("http://localhost:7000/filter/pricewise",{
 
 
 if(response.data.message==="No results based on your search"){
+    setLoading(false)
 setNoresults("No laptops found based on your prices")
 }
 else if(response.data.message==="laptops found"){
+    setLoading(false)
 setLaptopdateonprices(response.data.data)
 }   
 } catch (error) {
@@ -197,13 +208,21 @@ return(
     <li>
             All Laptops ({alllaptopscounted})
         </li>
-        <li>
-            HP Laptops ({noofHPlaptops})
+       <Link to="/hp/laptops">
+       <li>
+        HP Laptops ({noofHPlaptops})
         </li>
+       </Link>
 
-        <li>
-            Apple Laptops ({Noofapplelaptops})
+         
+
+       <Link to="/apple/laptops">
+       <li>
+        Apple Laptops ({Noofapplelaptops})
         </li>
+       </Link>
+
+
     </ul>
 
 
@@ -214,6 +233,9 @@ return(
 
 {/* //filter on key search term */}
 
+{loading?(<Preloader/>):(
+
+    
 <div className="searchitem">
 
 <div>
@@ -226,7 +248,9 @@ onChange={(e)=>setSearchterm(e.target.value)}
 <p>{noresults}</p>
 </div>
 {filteredData.map((item)=>(
-    <div className="alllaptopsdata">
+    <div className="alllaptopsdata" onClick={()=>{
+        navigate(`${item.feRoute}`)
+    }}>
 <div className="laptops-card">
 <strong><strong>{item.nameoflaptop}</strong></strong>
 <p>Brand:<strong>{item.brand}</strong></p>
@@ -251,46 +275,58 @@ onChange={(e)=>setSearchterm(e.target.value)}
 
 
 
+)}
 
+
+
+
+
+{loading?(<Preloader/>):(
+    <div className="filterpricewise">
+    <strong>Filter laptops pricewise</strong>
+    <div className="limits">
+     
+    <input type="number" placeholder="Enter lower price eg 0" onChange={(e)=>setLowerlimitpricerange(e.target.value)} />  to <input type="number" placeholder="Enter higher price eg 1000000" onChange={(e)=>setHigherlimitprice(e.target.value)} />
+    <i><FcSearch onClick={filterLaptopsonpricerange}/></i>
+    
+    <p>{noresults}</p>
+    </div>
+    
+    
+    {laptopsDataonprices.map((item)=>(
+    
+    <div className="laptops-container" onClick={()=>{
+        navigate(`${item.feRoute}`)
+    }}>
+    <div className="laptops-card">
+    <strong><span>{item.nameoflaptop}</span></strong>
+    <p>Brand:<span>{item.brand}</span></p>
+    <img src={item.laptopImageone} alt="" />
+    <p>cpuprocessor:<span>{item.cpuprocessor}</span></p>
+    <p>Condition:<span>{item.condition}</span></p>
+    <p>RAM Size:<span>{item.RAMSize}</span></p>
+    <p>Graphic processor:<span>{item.Graphicsprocessor}</span></p>
+    <p>Storage Capacity:<span>{item.StorageCapacity}</span></p>
+    <p>Hard Drive Type:<span>{item.HardDriveType}</span></p>
+    <p>Availability:<span>{item.availability}</span></p>
+    <h1>Price:<span> KSH {item.Price}</span></h1>
+    </div>
+    </div>
+    
+    
+    ))}
+    
+    
+    
+    
+    </div>
+    
+    
+
+)}
 
 
 {/* filter laptops on price range */}
-<div className="filterpricewise">
-<strong>Filter laptops pricewise</strong>
-<div className="limits">
- 
-<input type="number" placeholder="Enter lower price eg 0" onChange={(e)=>setLowerlimitpricerange(e.target.value)} />  to <input type="number" placeholder="Enter higher price eg 1000000" onChange={(e)=>setHigherlimitprice(e.target.value)} />
-<i><FcSearch onClick={filterLaptopsonpricerange}/></i>
-
-<p>{noresults}</p>
-</div>
-
-
-{laptopsDataonprices.map((item)=>(
-
-<div className="laptops-container">
-<div className="laptops-card">
-<strong><span>{item.nameoflaptop}</span></strong>
-<p>Brand:<span>{item.brand}</span></p>
-<img src={item.laptopImageone} alt="" />
-<p>cpuprocessor:<span>{item.cpuprocessor}</span></p>
-<p>Condition:<span>{item.condition}</span></p>
-<p>RAM Size:<span>{item.RAMSize}</span></p>
-<p>Graphic processor:<span>{item.Graphicsprocessor}</span></p>
-<p>Storage Capacity:<span>{item.StorageCapacity}</span></p>
-<p>Hard Drive Type:<span>{item.HardDriveType}</span></p>
-<p>Availability:<span>{item.availability}</span></p>
-<h1>Price:<span> KSH {item.Price}</span></h1>
-</div>
-</div>
-
-
-))}
-
-
-
-
-</div>
 
 
 
@@ -306,16 +342,13 @@ onChange={(e)=>setSearchterm(e.target.value)}
 
 
 
-
-
-
-
-
-
-
-
+{loading?(<Preloader/>):(
+    
+<>
 {alllaptopsdata.map((item)=>(
-<div className="alllaptopsdata">
+<div className="alllaptopsdata" onClick={()=>{
+    navigate(`${item.feRoute}`)
+}}>
 <div className="laptops-card">
 <strong><strong>{item.nameoflaptop}</strong></strong>
 <p>Brand:<strong>{item.brand}</strong></p>
@@ -331,6 +364,17 @@ onChange={(e)=>setSearchterm(e.target.value)}
 </div>
 </div>
 ))}
+
+</>
+
+
+    
+)}
+
+
+
+
+
 
 
 

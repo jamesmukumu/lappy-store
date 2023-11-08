@@ -55,8 +55,11 @@ const mailOptions = {
 transporter.sendMail(mailOptions)
 
 const token = jwt.sign({email},process.env.jwtpass,{expiresIn:"1h"})
-return res.status(200).setHeader("Authorization",token).json({message:"Saved and email sent"})
+return res.status(200).json({message:"Saved and email sent",data:token})
 } catch (error) {
+    if(error=="SequelizeUniqueConstraintError: Validation error"){
+    return res.status(200).json({message:"Email already exists"})
+    }
 return res.status(500).json({error:`${error}`})    
 }
 }
@@ -82,11 +85,11 @@ const matchingPassword = await bcrypt.compare(inputPassword,matchingUsername.Pas
 if(!matchingPassword){
 return res.status(200).json({message:"incorrect password"})
 }
-
-
-else{
-   return res.status(200).json({message:"logged in"}) 
+else if(matchingPassword){
+    const token = jwt.sign({matchingPassword},process.env.jwtpass,{expiresIn:"1h"})
+    return res.status(200).json({message:"logged in",data:token}) 
 }
+
 } catch (error) {
 return res.status(500).json({error:`${error}`})    
 }
@@ -104,6 +107,7 @@ if(!matchingEmail){
 return res.status(200).json({message:"Email does Not exist"})
 }
 else{
+    const token = jwt.sign({matchingEmail},process.env.jwtpass,{expiresIn:"700s"})
 const mailOptions = {
     to:recoveryEmail,
     from:process.env.gmailuser,
@@ -112,7 +116,8 @@ const mailOptions = {
 }
 
 await transporter.sendMail(mailOptions)
-return res.status(200).json({message:"Password reset link sent"})
+
+return res.status(200).json({message:"Password reset link sent",data:token})
 }   
 } catch (error) {
  return res.status(500).json({error})   
@@ -137,7 +142,7 @@ else{
     
 } catch (error) {
 return res.status(500).json({error})
-}}
+}} 
 
 
 
