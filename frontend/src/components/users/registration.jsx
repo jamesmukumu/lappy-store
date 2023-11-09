@@ -26,7 +26,7 @@ function Registerclient() {
   async function postRegisration(e) {
     setLoading(true);
     if (confirmpassword !== password) {
-      setLoading(false)
+      setLoading(false);
       setScsmsg("Passwords not matching");
       return setScsmsg;
     }
@@ -38,15 +38,12 @@ function Registerclient() {
     }
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "https://pj-laptops-store.onrender.com/post/user",
-        {
-          username: Username,
-          Password: password,
-          Email: email,
-          phoneNumber: phonenumber,
-        }
-      );
+      const response = await axios.post("http://localhost:700/post/user", {
+        username: Username,
+        Password: password,
+        Email: email,
+        phoneNumber: phonenumber,
+      });
       if (response.data.message === "Saved and email sent") {
         const token = response.data.data;
         Cookie.set("access cookie", token);

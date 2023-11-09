@@ -20,6 +20,13 @@ db.sequelize.sync()
 
 
 
+try {
+    app.use(require('./backend/routes/admin/adminroute')) 
+    
+} catch (error) {
+console.log(error)
+}
+
  
 
 

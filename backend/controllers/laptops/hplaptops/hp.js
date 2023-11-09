@@ -47,7 +47,7 @@ async function buyHpelitebook(req, res) {
   try {
     // Fetch the price of the laptop from the backend
     const priceResponse = await axios.get(
-      "https://pj-laptops-store.onrender.com/hp/elitebookg2/price"
+      "http://localhost:700/hp/elitebookg2/price"
     );
     const priceLaptop = priceResponse.data.data;
 

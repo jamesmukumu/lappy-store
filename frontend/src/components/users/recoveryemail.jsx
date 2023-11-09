@@ -15,12 +15,9 @@ function Validaterecoveryemail() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://pj-laptops-store.onrender.com/validate/email",
-        {
-          Email: recoveryemail,
-        }
-      );
+      const response = await axios.post("http://localhost:700/validate/email", {
+        Email: recoveryemail,
+      });
       if (response.data.message === "Password reset link sent") {
         setLoading(false);
         const token = response.data.data;

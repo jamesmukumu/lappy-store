@@ -21,9 +21,7 @@ function HpelitebookG2() {
     async function fetchMacbookairdata() {
       setLoading(true);
       try {
-        const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/hp/elitebookg2"
-        );
+        const response = await axios.get("http://localhost:700/hp/elitebookg2");
         if (response.data.message === "hp found") {
           setLoading(false);
           setMacbookairdata(response.data.data);
@@ -48,7 +46,7 @@ function HpelitebookG2() {
     async function fetchMacbookairdataprice() {
       try {
         const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/hp/elitebookg2/price",
+          "http://localhost:700/hp/elitebookg2/price",
           { headers: { Authorization: token } }
         );
         if (response.data.message === "Prices fetched") {
@@ -83,7 +81,7 @@ function HpelitebookG2() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://pj-laptops-store.onrender.com/buy/hp/elitebookg2",
+        "http://localhost:700/buy/hp/elitebookg2",
         { headers: { Authorization: token } },
         {
           Totals: subTotal,

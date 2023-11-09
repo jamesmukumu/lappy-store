@@ -19,12 +19,9 @@ function Lenovolaptops() {
     async function fetchApplelaptops() {
       setLoading(true);
       try {
-        const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/filter/lenovo",
-          {
-            headers: { Authorization: token },
-          }
-        );
+        const response = await axios.get("http://localhost:700/filter/lenovo", {
+          headers: { Authorization: token },
+        });
         if (response.data.message === "Lenovo laptops fetched") {
           setLoading(false);
           setApplelaptopsdata(response.data.data);
@@ -49,9 +46,7 @@ function Lenovolaptops() {
   useEffect(() => {
     async function Numberofapplelaptops() {
       try {
-        const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/count/apple"
-        );
+        const response = await axios.get("http://localhost:700/count/apple");
         if (response.data.message === "apple laptops counted") {
           setNoofapplelaptops(response.data.data);
         }

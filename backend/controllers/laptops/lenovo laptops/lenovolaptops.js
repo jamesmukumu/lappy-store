@@ -44,7 +44,7 @@ async function buyLenovoideapad(req, res) {
   try {
     // Fetch the price of the laptop from the backend
     const priceResponse = await axios.get(
-      "https://pj-laptops-store.onrender.com/lenovo/ideapad/price"
+      "http://localhost:700/lenovo/ideapad/price"
     );
     const priceLaptop = priceResponse.data.data;
 
@@ -52,7 +52,7 @@ async function buyLenovoideapad(req, res) {
     const response = await axios.post(
       "https://sandbox.intasend.com/api/v1/checkout/",
       {
-        public_key: "process.env.instasendpublic",
+        public_key: process.env.instasendpublic,
         amount: priceLaptop,
       }
     );

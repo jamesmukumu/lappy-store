@@ -22,7 +22,7 @@ function Macbookprom2() {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/apple/macbookprom2"
+          "http://localhost:700/apple/macbookprom2"
         );
         if (response.data.message === "apple found") {
           setLoading(false);
@@ -48,7 +48,7 @@ function Macbookprom2() {
     async function fetchMacbookairdataprice() {
       try {
         const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/apple/macbookprom2/price",
+          "http://localhost:700/apple/macbookprom2/price",
           {
             headers: { Authorization: token },
           }
@@ -85,7 +85,7 @@ function Macbookprom2() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://pj-laptops-store.onrender.com/buy/applemacbookprom2",
+        "http://localhost:700/buy/applemacbookprom2",
         { headers: { Authorization: token } },
         {
           Totals: subTotal,

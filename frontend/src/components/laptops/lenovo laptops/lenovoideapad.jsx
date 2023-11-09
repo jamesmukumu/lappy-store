@@ -21,9 +21,7 @@ function Lenovoideapad() {
     async function fetchMacbookairdata() {
       setLoading(true);
       try {
-        const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/lenovo/ideapad"
-        );
+        const response = await axios.get("http://localhost:700/lenovo/ideapad");
         if (response.data.message === "lenovo found") {
           setLoading(false);
           setMacbookairdata(response.data.data);
@@ -48,7 +46,7 @@ function Lenovoideapad() {
     async function fetchMacbookairdataprice() {
       try {
         const response = await axios.get(
-          "https://pj-laptops-store.onrender.com/lenovo/ideapad/price",
+          "http://localhost:700/lenovo/ideapad/price",
           {
             headers: { Authorization: token },
           }
@@ -84,7 +82,7 @@ function Lenovoideapad() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://pj-laptops-store.onrender.com/buy/lenovo/ideapad",
+        "http://localhost:700/buy/lenovo/ideapad",
         {
           Totals: subTotal,
         },
