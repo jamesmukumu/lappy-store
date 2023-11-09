@@ -26,6 +26,7 @@ function Registerclient() {
   async function postRegisration(e) {
     setLoading(true);
     if (confirmpassword !== password) {
+      setLoading(false)
       setScsmsg("Passwords not matching");
       return setScsmsg;
     }
