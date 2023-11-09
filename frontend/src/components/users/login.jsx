@@ -36,7 +36,7 @@ async function postLogin(e){
  }
 e.preventDefault()
 try {
- const response = await axios.post("http://localhost:7000/login/client",{
+ const response = await axios.post("https://pj-laptops-store.onrender.com/login/client",{
 username:Username,
 Password:password,
 

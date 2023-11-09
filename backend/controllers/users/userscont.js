@@ -48,7 +48,7 @@ const mailOptions = {
     to:req.body.Email,
     from:process.env.gmailuser, 
     subject:"Sign Up",
-    html:"Thank you for signing up we appreciate and love you"
+    html:'<strong style="color:plum;">Thank you for signing up we appreciate and care for your</strong>'
 }
 
 
@@ -112,7 +112,7 @@ const mailOptions = {
     to:recoveryEmail,
     from:process.env.gmailuser,
     subject:"Password Reset",
-    html:"<p>Reset Your password here</p>"
+    html:'<p style="color:green;">Reset Your Password here this link is valid for <span style="color:red;">10 minutes</span> </p> <a href="https://lappy-store.web.app/reset/password">Reset Password</a>>'
 }
 
 await transporter.sendMail(mailOptions)

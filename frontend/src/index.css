@@ -256,7 +256,7 @@ body{
   margin-top: 20px;
    box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
    display: inline-block;
-    margin-right: 20px;
+    margin-right: 5px;
     text-align: center; 
     cursor: pointer; 
 }

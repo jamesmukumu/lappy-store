@@ -32,7 +32,7 @@ async function fetchLenovoideapadprice(req, res) {
     if (!lenovoIdeapadlaptop) {
       return res.status(200).json({ message: "no laptop found" });
     } else {
-      return res.status(200).json({message:"Prices fetched",data:price} );
+      return res.status(200).json({ message: "Prices fetched", data: price });
     }
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
@@ -44,7 +44,7 @@ async function buyLenovoideapad(req, res) {
   try {
     // Fetch the price of the laptop from the backend
     const priceResponse = await axios.get(
-      "http://localhost:7000/lenovo/ideapad/price"
+      "https://pj-laptops-store.onrender.com/lenovo/ideapad/price"
     );
     const priceLaptop = priceResponse.data.data;
 
@@ -57,7 +57,9 @@ async function buyLenovoideapad(req, res) {
       }
     );
 
-    return res.status(200).json({message:"Url fetched",data:response.data.url});
+    return res
+      .status(200)
+      .json({ message: "Url fetched", data: response.data.url });
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
   }

@@ -43,7 +43,7 @@ async function postnewPassword(e){
     }
 e.preventDefault()
 try {
- const response = await axios.put("http://localhost:7000/change/password",{headers:{Authorization:token}},{
+ const response = await axios.put("https://pj-laptops-store.onrender.com/change/password",{headers:{Authorization:token}},{
 Password:password
 
  },

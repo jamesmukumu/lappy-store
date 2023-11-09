@@ -12,11 +12,13 @@ import Macbookprom2 from "./components/laptops/apple laptops/macbook pro m2";
 import Applelaptops from "./components/categories/apple";
 import HpelitebookG2 from "./components/laptops/hp laptops/hpelitebookG2";
 import Lenovoideapad from "./components/laptops/lenovo laptops/lenovoideapad";
+import Pagenotfound from "./404";
 function App(){
   return(
     <div>
      <BrowserRouter>
      <Routes>
+     <Route path="*" element={<Pagenotfound/>}/>
      <Route path="/lenovo/laptops" element={<Lenovolaptops/>}/>
      <Route path="/" element={<Navigationmenu/>}/> 
      <Route path="/apple/laptops" element={<Applelaptops/>}/>

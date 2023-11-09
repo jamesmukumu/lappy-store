@@ -25,7 +25,7 @@ useEffect(()=>{
     async function fetchAllLaptops(){
         setLoading(true)
         try {
-        const response = await axios.get('http://localhost:7000/get/alllaptops')
+        const response = await axios.get('https://pj-laptops-store.onrender.com/get/alllaptops')
         if(response.data.message==="all laptops"){
         setAlllaptopsdate(response.data.data)
         setLoading(false)
@@ -51,7 +51,7 @@ useEffect(()=>{
 async function fetchLaptoponterm(){
     setLoading(true)
 try {
-const response  = await axios.get('http://localhost:7000/filter/all',{
+const response  = await axios.get('https://pj-laptops-store.onrender.com/filter/all',{
     params:{keySearchterm:searchTerm}
 })
 
@@ -86,7 +86,7 @@ setNoresults("No results found based on your search")
 async function filterLaptopsonpricerange(){
     setLoading(true)
 try {
-const response = await axios.get("http://localhost:7000/filter/pricewise",{
+const response = await axios.get("https://pj-laptops-store.onrender.com/filter/pricewise",{
     params:{
      higherlimit:higherlimitpricerange,
      lowerlimit:lowerlimitPricerange 
@@ -117,7 +117,7 @@ setLaptopdateonprices(response.data.data)
 useEffect(()=>{
     async function Numberofhplaptops(){
         try {
-            const response = await axios.get("http://localhost:7000/count/hp")
+            const response = await axios.get("https://pj-laptops-store.onrender.com/count/hp")
         if(response.data.message==="hp laptops counted"){
         setNoofhplaptops(response.data.data)
         }    
@@ -133,7 +133,7 @@ useEffect(()=>{
 useEffect(()=>{
     async function Numberoflenovolaptops(){
         try {
-            const response = await axios.get("http://localhost:7000/count/lenovo")
+            const response = await axios.get("https://pj-laptops-store.onrender.com/count/lenovo")
         if(response.data.message==="lenovo laptops counted"){
         setNooflenovolaptops(response.data.data)
         }    
@@ -151,7 +151,7 @@ useEffect(()=>{
 useEffect(()=>{
     async function Totalnooflaptops(){
         try {
-            const response = await axios.get("http://localhost:7000/count/alllaptops")
+            const response = await axios.get("https://pj-laptops-store.onrender.com/count/alllaptops")
         if(response.data.message==="laptops counted"){
         setAlllaptopscounted(response.data.data)
         }    
@@ -186,7 +186,7 @@ function toggleCategories(){
 useEffect(()=>{
     async function Numberofapplelaptops(){
         try {
-            const response = await axios.get("http://localhost:7000/count/apple")
+            const response = await axios.get("https://pj-laptops-store.onrender.com/count/apple")
         if(response.data.message==="apple laptops counted"){
         setNoofapplelaptops(response.data.data)
         }    
