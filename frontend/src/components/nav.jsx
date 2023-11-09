@@ -20,6 +20,7 @@ const [noofHPlaptops,setNoofhplaptops] = useState([])
 const [alllaptopscounted,setAlllaptopscounted] = useState([])
 const  [isVisible,setIsvisible] = useState(false)
 const  [Noofapplelaptops,setNoofapplelaptops] = useState([])
+const  [Nooflenovolaptops,setNooflenovolaptops] = useState([])
 useEffect(()=>{
     async function fetchAllLaptops(){
         setLoading(true)
@@ -130,6 +131,24 @@ useEffect(()=>{
 
 
 useEffect(()=>{
+    async function Numberoflenovolaptops(){
+        try {
+            const response = await axios.get("http://localhost:7000/count/lenovo")
+        if(response.data.message==="lenovo laptops counted"){
+        setNooflenovolaptops(response.data.data)
+        }    
+        } catch (error) {
+            console.log(error)
+         }}
+         Numberoflenovolaptops()
+},[])
+
+
+
+
+
+
+useEffect(()=>{
     async function Totalnooflaptops(){
         try {
             const response = await axios.get("http://localhost:7000/count/alllaptops")
@@ -208,7 +227,7 @@ return(
     <li>
             All Laptops ({alllaptopscounted})
         </li>
-       <Link to="/hp/laptops">
+       <Link to="/hp/laptops" className="link">
        <li>
         HP Laptops ({noofHPlaptops})
         </li>
@@ -216,7 +235,7 @@ return(
 
          
 
-       <Link to="/apple/laptops">
+       <Link to="/apple/laptops" className="link">
        <li>
         Apple Laptops ({Noofapplelaptops})
         </li>
@@ -224,9 +243,9 @@ return(
 
 
 
-       <Link to="/lenovo/laptops">
+       <Link to="/lenovo/laptops" className="link">
        <li>
-        Lenovo Laptops ({Noofapplelaptops})
+        Lenovo Laptops ({Nooflenovolaptops})
         </li>
        </Link>
 

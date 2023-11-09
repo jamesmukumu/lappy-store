@@ -152,7 +152,7 @@ required
 <button>Sign Up</button>
 <p className="msg">{scsmsg}</p>
 <p className="msg">{passwordlength}</p>
-<Link to="/login/client"><stron>Already have an account?</stron></Link>
+<Link to="/login/client" className="link"><stron>Already have an account?</stron></Link>
 </form>
 
 

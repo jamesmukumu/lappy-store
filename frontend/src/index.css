@@ -146,6 +146,12 @@ body{
     box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.75);
     text-align: center;
 }
+.link{
+    text-decoration: none;
+    color: black;
+    font-size: 21px;
+    padding-bottom: 10px;
+}
 .checkout button{
     margin-top: 20px;
     width: 200px;

@@ -124,9 +124,9 @@ required
 <button>Login</button>
 <p className="msg">{scsmsg}</p>
 <p className="msg">{passwordlength}</p>
-<Link to="/register/client"><stron>Dont have an account?</stron></Link>
+<Link to="/register/client" className="link"><stron>Dont have an account?</stron></Link>
 <div>
-<Link to="/validate/recovery/email"><stron>Forgot Password?</stron></Link>
+<Link to="/validate/recovery/email" className="link"><stron>Forgot Password?</stron></Link>
 </div>
 </form>
 
