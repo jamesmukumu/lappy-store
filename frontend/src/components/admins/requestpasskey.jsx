@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import Preloader from "../../preloader";
 import axios from "axios";
-import Cookie from "js-cookie";
-function Validaterecoveryemailforadmins() {
+
+function Requestotpbcnd() {
   const [recoveryemail, setRecovery] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -11,24 +11,24 @@ function Validaterecoveryemailforadmins() {
 
   async function fetchrecoveryEmail(e) {
     setLoading(true);
-
+//
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:7000/validate/email/admin",
-        {
-          Email: recoveryemail,
-        }
+      const response = await axios.get(
+        "http://localhost:7000/request/otp",
+       {
+        params:{Email:recoveryemail}
+       }
       );
       if (
-        response.data.message === "Email validated and reset password link sent"
+        response.data.message === "Email found reset and otp sent"
       ) {
         setLoading(false);
-        const token = response.data.data;
-        Cookie.set("reset cookie admins", token);
-        setScsmsg("reset link sent");
-      } else if (response.data.message === "Email not found") {
+       
+       
+        setScsmsg("otp sent check your email inbox");
+      } else if (response.data.message === "No matching email") {
         setLoading(false);
         setScsmsg("Email does not exist");
       }
@@ -46,7 +46,7 @@ function Validaterecoveryemailforadmins() {
             alt=""
           />
         </div>
-        <strong>Recover Password through Email for Admin</strong>
+        <strong>Get your otp through email</strong>
 
         {loading ? (
           <Preloader />
@@ -61,7 +61,7 @@ function Validaterecoveryemailforadmins() {
               />
             </div>
 
-            <button>Recover</button>
+            <button>Request otp</button>
             <p className="msg">{scsmsg}</p>
           </form>
         )}
@@ -69,4 +69,4 @@ function Validaterecoveryemailforadmins() {
     </div>
   );
 }
-export default Validaterecoveryemailforadmins;
+export default Requestotpbcnd

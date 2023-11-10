@@ -19,12 +19,23 @@ import LoginAdminwithpasskey from "./components/admins/loginwithpasskey";
 import Validaterecoveryemailforadmins from "./components/admins/validateemail";
 import Resetpasswordadmins from "./components/admins/resetpassword";
 import Insertlaptop from "./components/admins/laptops admin/insert laptops";
+import Updateaavailabity from "./components/admins/laptops admin/updateavailability";
+import Updateprice from "./components/admins/laptops admin/updateprice";
+import Deletelaptop from "./components/admins/laptops admin/deletelaptop";
+import Requestotpbcnd from "./components/admins/requestpasskey";
+import Navigationmenuadmin from "./components/admins/navadmin";
+//
 function App(){
   return(
     <div>
      <BrowserRouter>
      <Routes>
      <Route path="*" element={<Pagenotfound/>}/>
+     <Route path="/nav/admin" element={<Navigationmenuadmin/>}/>
+     <Route path="/request/otp" element={<Requestotpbcnd/>}/>
+     <Route path="/delete/laptop" element={<Deletelaptop/>}/>
+     <Route path="/update/price" element={<Updateprice/>}/>
+     <Route path="/update/availability" element={<Updateaavailabity/>}/>
      <Route path="/post/laptop" element={<Insertlaptop/>}/>
      <Route path="/reset/password/admin" element={<Resetpasswordadmins/>}/>
      <Route path="/login/admin" element={<LoginAdmin/>}/>

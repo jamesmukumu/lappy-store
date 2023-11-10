@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie";
 
 import { Link } from "react-router-dom";
 import Preloader from "../../../preloader";
 function Insertlaptop() {
+  var navigate = useNavigate()
   const [price, setPrice] = useState("");
   const [laptopImageone, setLaptopimageone] = useState("");
   const [laptopImagetwo, setLaptopimagetwo] = useState("");
@@ -64,6 +65,11 @@ function Insertlaptop() {
       setScsmsg("laptop insertion sucess")
         
       } 
+      else if(response.data.message==="Unauthorized no token"){
+        setTimeout(()=>{
+            navigate("/")
+        },3000)
+        }
     } catch (error) {
         setLoading(false)
         setScsmsg("An error occured while posting")

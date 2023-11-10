@@ -38,7 +38,7 @@ function RegisterAdmin() {
     }
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:70000/post/admin", {
+      const response = await axios.post("http://localhost:7000/post/admin", {
         firstname: Firstname,
         password: password,
         Email: email,
@@ -47,7 +47,7 @@ function RegisterAdmin() {
       if (response.data.message === "Admin saved to the db") {
         const token = response.data.data;
         Cookie.set("admin cookie", token);
-        navigate("/");
+        navigate("/nav/admin");
       } else if (response.data.message === "Email already exists") {
         setLoading(false);
         setScsmsg("Email  already in use");
@@ -133,7 +133,7 @@ function RegisterAdmin() {
             <button>Sign Up</button>
             <p className="msg">{scsmsg}</p>
             <p className="msg">{passwordlength}</p>
-            <Link to="/login/client" className="link">
+            <Link to="/login/admin" className="link">
               <stron>Already have an account?</stron>
             </Link>
           </form>

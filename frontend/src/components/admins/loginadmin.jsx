@@ -7,6 +7,7 @@ import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Preloader from "../../preloader";
+
 function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +31,7 @@ function LoginAdmin() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:70000/login/admin/password",
+        "http://localhost:7000/login/admin/password",
         {
           Email: email,
           password: password,
@@ -41,7 +42,7 @@ function LoginAdmin() {
         const token = response.data.data;
         Cookie.set("admin cookie", token);
         setTimeout(() => {
-          navigate("/");
+          navigate("/nav/admin");
         }, 2000);
       } else if (response.data.message === "Email not found") {
         setLoading(false);
@@ -102,12 +103,15 @@ function LoginAdmin() {
             <button>Login</button>
             <p className="msg">{scsmsg}</p>
             <p className="msg">{passwordlength}</p>
-            <Link to="/register/client" className="link">
+            <Link to="/register/admin" className="link">
               <stron>Dont have an account?</stron>
             </Link>
             <div>
-              <Link to="/validate/recovery/email" className="link">
+              <Link to="/validate/email/admin" className="link">
                 <stron>Forgot Password?</stron>
+              </Link>
+              <Link to="/login/admin/passkey" className="link">
+                <stron>login with passkey?</stron>
               </Link>
             </div>
           </form>

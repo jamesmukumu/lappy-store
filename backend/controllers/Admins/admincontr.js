@@ -138,7 +138,7 @@ return res.status(500).json({error:`${error}`})
 
 // reset password 
 
-
+//
 async function resetPassword(req,res){
 try {
     const hashedPassword = await bcrypt.hash(req.body.password,10)
@@ -174,7 +174,7 @@ const mailoptions = {
     to:targetEmail,
     from:process.env.gmailuser,
     subject:"Request for OTP",
-    html:`<p>your otp is ${otp}</p>`
+    html:`<p style="color:plum;">Here is your otp <span style="color:blue;">${otp}</span><p> <a href="https://lappy-store.web.app//login/admin/passkey"<a/>`
 }
 await transporter.sendMail(mailoptions)
 
@@ -209,7 +209,7 @@ else if(validatedEmail){
         to:targetEmail,
         from:process.env.gmailuser,
         subject:"Reset password link",
-        html:`<p>Reset your password this link expires after 10 minutes</p>`
+        html:`<p>Reset your password this link expires after 10 minutes <a href"https://lappy-store.web.app/reset/password/admin"</a></p>`
     }
     await transporter.sendMail(mailOptions)
     const token = jwt.sign({validatedEmail},process.env.jwtpassadmin,{expiresIn:"600s"})

@@ -18,7 +18,7 @@ function LoginAdminwithpasskey() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:70000/login/with/otp",
+        "http://localhost:7000/login/with/otp",
         {
           recoveryOTP: passkey,
         }
@@ -28,7 +28,7 @@ function LoginAdminwithpasskey() {
         const token = response.data.data;
         Cookie.set("admin cookie", token);
         setTimeout(() => {
-          navigate("/");
+          navigate("/nav/admin");
         }, 2000);
       } else if (response.data.message === "invalid login otp") {
         setLoading(false);
@@ -66,12 +66,12 @@ function LoginAdminwithpasskey() {
             <button>Login</button>
             <p className="msg">{scsmsg}</p>
 
-            <Link to="/register/client" className="link">
+            <Link to="/register/admin" className="link">
               <stron>Dont have an account?</stron>
             </Link>
             <div>
-              <Link to="/validate/recovery/email" className="link">
-                <stron>Forgot Password?</stron>
+              <Link to="/request/otp" className="link">
+                <stron>Get your passkey?</stron>
               </Link>
             </div>
           </form>
