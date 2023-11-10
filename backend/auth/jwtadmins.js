@@ -20,7 +20,7 @@ return next()
 } catch (error) {
 if(error.name==="TokenExpiredError"){
 return res.json({message:"Unauthorized no token"})
-} 
+}  
 return res.status(500).json({error})
 }
 }

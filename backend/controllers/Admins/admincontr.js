@@ -3,17 +3,37 @@ const crypto = require("crypto")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const dotenv = require("dotenv")
+const nodemailer = require("nodemailer")
 dotenv.config()
 
 
 
+
+const transporter = nodemailer.createTransport({
+    service:"gmail",
+    host:"smtp.gmail.com",
+    secure:false,
+    auth:{
+        user:process.env.gmailuser,
+        pass:process.env.pass
+    }
+})
+
+
+
+
+
+
+
+
+
 function generateRandomOTP(){
-    const otp = crypto.randomBytes(32).toString("hex")
+    const otp = crypto.randomBytes(4).toString("hex")
     return otp
 }
 
-const randomotp = generateRandomOTP()
-console.log(randomotp)
+const randomotp = generateRandomOTP()   
+console.log(randomotp) 
 
 
 
@@ -30,13 +50,13 @@ try {
      Email:req.body.Email,
      recoveryOTP:randomotp
 
-    })
+    }) 
 
      await insertedAdmin.save()
-      const token = jwt.sign({Email},process.env.jwtpassadmin,{expiresIn:"670s"})
-    return res.status(200).setHeader("Authorization",token).json({message:"Admin saved to the db"})
+      const token = jwt.sign({insertedAdmin},process.env.jwtpassadmin,{expiresIn: "670s"})
+    return res.status(200).json({message:"Admin saved to the db",data:token})
 } catch (error) {
-    if(error==="SequelizeUniqueConstraintError: Validation error"){
+    if(error== "SequelizeUniqueConstraintError: Validation error"){
      return res.status(200).json({message:"Email already exists"})
     }
     else{
@@ -47,7 +67,7 @@ try {
 
 
 
-
+ 
 
 
 
@@ -75,7 +95,7 @@ return res.status(200).json({message:"Password does not match"})
 }
 else{
     const token = jwt.sign({matchingEmail},process.env.jwtpassadmin,{expiresIn:"670s"})
-    return res.status(200).setHeader("Authorization",token).json({message:"logged in"})
+    return res.status(200).json({message:"logged in",data:token})
 }
 
 
@@ -101,7 +121,7 @@ return res.status(200).json({message:"invalid login otp"})
 }
 else{
     const token = jwt.sign({loginOtp},process.env.jwtpassadmin,{expiresIn:"670s"})
-    return res.status(200).setHeader("Authoriztion",token).json({message:"otp valid"})
+    return res.status(200).setHeader("Authoriztion",token).json({message:"otp valid",data:token})
 }
 
 } catch (error) {
@@ -148,8 +168,17 @@ const matchingEmail = await Admin.findOne({where:{Email:req.query.Email}})
 if(!matchingEmail){
 return res.status(200).json({message:"No matching email"})
 }
+const targetEmail = matchingEmail.Email
 const otp = matchingEmail.recoveryOTP
-return res.status(200).json({message:"Email found reset",data:otp})
+const mailoptions = {
+    to:targetEmail,
+    from:process.env.gmailuser,
+    subject:"Request for OTP",
+    html:`<p>your otp is ${otp}</p>`
+}
+await transporter.sendMail(mailoptions)
+
+return res.status(200).json({message:"Email found reset and otp sent",data:otp})
 
     
 } catch (error) {
@@ -167,6 +196,30 @@ return res.status(200).json({message:"Email found reset",data:otp})
 
 
 
+//validate email existence 
+async function Validateemail(req,res){
+try {
+const validatedEmail = await Admin.findOne({where:{Email:req.body.Email}})
+if(!validatedEmail){
+return res.status(200).json({message:"Email not found"})
+}
+else if(validatedEmail){
+    const targetEmail = validatedEmail.Email
+    const mailOptions = {
+        to:targetEmail,
+        from:process.env.gmailuser,
+        subject:"Reset password link",
+        html:`<p>Reset your password this link expires after 10 minutes</p>`
+    }
+    await transporter.sendMail(mailOptions)
+    const token = jwt.sign({validatedEmail},process.env.jwtpassadmin,{expiresIn:"600s"})
+    return res.status(200).setHeader("Authorization",token).json({message:"Email validated and reset password link sent"})
+}
+} catch (error) {
+return res.status(500).json({error:`${error}`})    
+} 
+
+}
 
 
 
@@ -174,4 +227,7 @@ return res.status(200).json({message:"Email found reset",data:otp})
 
 
 
-module.exports = {postAdmin,loginAdminwithpassword,loginwithOTP,resetPassword,requestOTP}
+
+
+
+module.exports = {postAdmin,loginAdminwithpassword,loginwithOTP,resetPassword,requestOTP,Validateemail}

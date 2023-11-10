@@ -13,12 +13,18 @@ import Applelaptops from "./components/categories/apple";
 import HpelitebookG2 from "./components/laptops/hp laptops/hpelitebookG2";
 import Lenovoideapad from "./components/laptops/lenovo laptops/lenovoideapad";
 import Pagenotfound from "./404";
+import RegisterAdmin from "./components/admins/registrationadmin";
+import LoginAdmin from "./components/admins/loginadmin";
+import LoginAdminwithpasskey from "./components/admins/loginwithpasskey";
 function App(){
   return(
     <div>
      <BrowserRouter>
      <Routes>
      <Route path="*" element={<Pagenotfound/>}/>
+     <Route path="/login/admin" element={<LoginAdmin/>}/>
+     <Route path="/login/admin/passkey" element={<LoginAdminwithpasskey/>}/>
+     <Route path="/register/admin" element={<RegisterAdmin/>}/>
      <Route path="/lenovo/laptops" element={<Lenovolaptops/>}/>
      <Route path="/" element={<Navigationmenu/>}/> 
      <Route path="/apple/laptops" element={<Applelaptops/>}/>
