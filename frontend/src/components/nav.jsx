@@ -25,7 +25,9 @@ function Navigationmenu() {
     async function fetchAllLaptops() {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:700/get/alllaptops");
+        const response = await axios.get(
+          "http://localhost:7000/get/alllaptops"
+        );
         if (response.data.message === "all laptops") {
           setAlllaptopsdate(response.data.data);
           setLoading(false);
@@ -43,7 +45,7 @@ function Navigationmenu() {
   async function fetchLaptoponterm() {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:700/filter/all", {
+      const response = await axios.get("http://localhost:7000/filter/all", {
         params: { keySearchterm: searchTerm },
       });
 
@@ -64,7 +66,7 @@ function Navigationmenu() {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:700/filter/pricewise",
+        "http://localhost:7000/filter/pricewise",
         {
           params: {
             higherlimit: higherlimitpricerange,
@@ -88,7 +90,7 @@ function Navigationmenu() {
   useEffect(() => {
     async function Numberofhplaptops() {
       try {
-        const response = await axios.get("http://localhost:700/count/hp");
+        const response = await axios.get("http://localhost:7000/count/hp");
         if (response.data.message === "hp laptops counted") {
           setNoofhplaptops(response.data.data);
         }
@@ -102,7 +104,7 @@ function Navigationmenu() {
   useEffect(() => {
     async function Numberoflenovolaptops() {
       try {
-        const response = await axios.get("http://localhost:700/count/lenovo");
+        const response = await axios.get("http://localhost:7000/count/lenovo");
         if (response.data.message === "lenovo laptops counted") {
           setNooflenovolaptops(response.data.data);
         }
@@ -117,7 +119,7 @@ function Navigationmenu() {
     async function Totalnooflaptops() {
       try {
         const response = await axios.get(
-          "http://localhost:700/count/alllaptops"
+          "http://localhost:7000/count/alllaptops"
         );
         if (response.data.message === "laptops counted") {
           setAlllaptopscounted(response.data.data);
@@ -137,7 +139,7 @@ function Navigationmenu() {
   useEffect(() => {
     async function Numberofapplelaptops() {
       try {
-        const response = await axios.get("http://localhost:700/count/apple");
+        const response = await axios.get("http://localhost:7000/count/apple");
         if (response.data.message === "apple laptops counted") {
           setNoofapplelaptops(response.data.data);
         }

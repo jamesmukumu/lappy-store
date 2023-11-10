@@ -22,7 +22,7 @@ function Macbookairgold() {
       setLoading(true);
       try {
         const response = await axios.get(
-          "http://localhost:700/apple/macbookairgold"
+          "http://localhost:7000/apple/macbookairgold"
         );
         if (response.data.message === "apple found") {
           setLoading(false);
@@ -48,7 +48,7 @@ function Macbookairgold() {
     async function fetchMacbookairdataprice() {
       try {
         const response = await axios.get(
-          "http://localhost:700/apple/macbookairgold/price",
+          "http://localhost:7000/apple/macbookairgold/price",
           {
             headers: { Authorization: token },
           }
@@ -84,7 +84,7 @@ function Macbookairgold() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:700/buy/applemacbookairgold",
+        "http://localhost:7000/buy/applemacbookairgold",
         {
           Totals: subTotal,
         },

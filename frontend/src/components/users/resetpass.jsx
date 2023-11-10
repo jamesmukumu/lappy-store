@@ -38,7 +38,7 @@ function Resetpassword() {
     e.preventDefault();
     try {
       const response = await axios.put(
-        "http://localhost:700/change/password",
+        "http://localhost:7000/change/password",
         { headers: { Authorization: token } },
         {
           Password: password,

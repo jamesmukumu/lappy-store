@@ -250,7 +250,14 @@ body{
 .results-laptop div{
     margin-left: 20px;
 }
-
+.reginfo textarea{
+    width: 500px;
+    height: 200px;
+}
+.reginfo textarea::placeholder{
+    text-align: center;
+    
+}
 .alllaptopsdata{
     background-color: beige;
   margin-top: 20px;

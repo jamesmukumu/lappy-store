@@ -44,7 +44,7 @@ async function buyLenovoideapad(req, res) {
   try {
     // Fetch the price of the laptop from the backend
     const priceResponse = await axios.get(
-      "http://localhost:700/lenovo/ideapad/price"
+      "http://localhost:7000/lenovo/ideapad/price"
     );
     const priceLaptop = priceResponse.data.data;
 

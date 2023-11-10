@@ -19,7 +19,7 @@ function Applelaptops() {
     async function fetchApplelaptops() {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:700/filter/apple", {
+        const response = await axios.get("http://localhost:7000/filter/apple", {
           headers: { Authorization: token },
         });
         if (response.data.message === "Apple laptops fetched") {
@@ -46,7 +46,7 @@ function Applelaptops() {
   useEffect(() => {
     async function Numberofapplelaptops() {
       try {
-        const response = await axios.get("http://localhost:700/count/apple");
+        const response = await axios.get("http://localhost:7000/count/apple");
         if (response.data.message === "apple laptops counted") {
           setNoofapplelaptops(response.data.data);
         }

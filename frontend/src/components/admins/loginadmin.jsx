@@ -29,10 +29,13 @@ function LoginAdmin() {
     }
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:7000/login/admin/password", {
-        Email: email,
-        password:password,
-      });
+      const response = await axios.post(
+        "http://localhost:70000/login/admin/password",
+        {
+          Email: email,
+          password: password,
+        }
+      );
       if (response.data.message === "logged in") {
         setLoading(false);
         const token = response.data.data;
@@ -61,7 +64,7 @@ function LoginAdmin() {
             alt=""
           />
         </div>
-        <strong>Login  Admin PJ Laptops</strong>
+        <strong>Login Admin PJ Laptops</strong>
 
         {loading ? (
           <Preloader />

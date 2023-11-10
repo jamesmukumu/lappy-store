@@ -11,7 +11,7 @@ function RegisterAdmin() {
   const [Firstname, setFirstname] = useState("");
   const [Secondname, setSecondname] = useState("");
   const [email, setEmail] = useState("");
- const [password,setPassword] = useState("")
+  const [password, setPassword] = useState("");
   const [passwordlength, setPasswordlenght] = useState("");
   const [confirmpassword, setConfirmpassword] = useState("");
   const [scsmsg, setScsmsg] = useState("");
@@ -38,10 +38,10 @@ function RegisterAdmin() {
     }
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:7000/post/admin", {
+      const response = await axios.post("http://localhost:70000/post/admin", {
         firstname: Firstname,
-        password:password,
-        Email:email,
+        password: password,
+        Email: email,
         secondname: Secondname,
       });
       if (response.data.message === "Admin saved to the db") {
@@ -52,7 +52,7 @@ function RegisterAdmin() {
         setLoading(false);
         setScsmsg("Email  already in use");
       }
-    } catch (error) { 
+    } catch (error) {
       console.log(error);
     }
   }
@@ -80,8 +80,6 @@ function RegisterAdmin() {
                 required
               />
             </div>
-
-        
 
             <div className="reginfo">
               <input
@@ -144,4 +142,4 @@ function RegisterAdmin() {
     </div>
   );
 }
-export default RegisterAdmin
+export default RegisterAdmin;

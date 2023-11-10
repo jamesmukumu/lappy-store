@@ -213,7 +213,7 @@ else if(validatedEmail){
     }
     await transporter.sendMail(mailOptions)
     const token = jwt.sign({validatedEmail},process.env.jwtpassadmin,{expiresIn:"600s"})
-    return res.status(200).setHeader("Authorization",token).json({message:"Email validated and reset password link sent"})
+    return res.status(200).json({message:"Email validated and reset password link sent",data:token})
 }
 } catch (error) {
 return res.status(500).json({error:`${error}`})    

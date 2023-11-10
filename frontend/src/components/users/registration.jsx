@@ -38,7 +38,7 @@ function Registerclient() {
     }
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:700/post/user", {
+      const response = await axios.post("http://localhost:7000/post/user", {
         username: Username,
         Password: password,
         Email: email,

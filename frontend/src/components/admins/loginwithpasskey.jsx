@@ -8,22 +8,21 @@ import { Link } from "react-router-dom";
 import Preloader from "../../preloader";
 function LoginAdminwithpasskey() {
   const [passkey, setPasskey] = useState("");
-  const [loading,setLoading] = useState(false)
-  const [scsmsg,setScsmsg] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [scsmsg, setScsmsg] = useState("");
   let navigate = useNavigate();
 
-
- 
   async function postLogin(e) {
     setLoading(true);
 
-   
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:7000/login/with/otp", {
-        recoveryOTP:passkey,
-        
-      });
+      const response = await axios.post(
+        "http://localhost:70000/login/with/otp",
+        {
+          recoveryOTP: passkey,
+        }
+      );
       if (response.data.message === "otp valid") {
         setLoading(false);
         const token = response.data.data;
@@ -49,7 +48,7 @@ function LoginAdminwithpasskey() {
             alt=""
           />
         </div>
-        <strong>Login  Admin PJ with Passkey</strong>
+        <strong>Login Admin PJ with Passkey</strong>
 
         {loading ? (
           <Preloader />
@@ -64,11 +63,9 @@ function LoginAdminwithpasskey() {
               />
             </div>
 
-           
-
             <button>Login</button>
             <p className="msg">{scsmsg}</p>
-          
+
             <Link to="/register/client" className="link">
               <stron>Dont have an account?</stron>
             </Link>

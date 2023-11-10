@@ -17,7 +17,7 @@ function HPlaptops() {
     async function fetchApplelaptops() {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:700/filter/hp", {
+        const response = await axios.get("http://localhost:7000/filter/hp", {
           headers: { Authorization: token },
         });
         if (response.data.message === "hp laptops found") {
@@ -44,7 +44,7 @@ function HPlaptops() {
   useEffect(() => {
     async function Numberofapplelaptops() {
       try {
-        const response = await axios.get("http://localhost:700/count/hp");
+        const response = await axios.get("http://localhost:7000/count/hp");
         if (response.data.message === "hp laptops counted") {
           setNoofapplelaptops(response.data.data);
         }

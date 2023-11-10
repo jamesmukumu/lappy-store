@@ -232,7 +232,7 @@ return res.status(200).json({message:"laptops counted",data:countedlaptops})
 return res.status(500).json({error:`${error}`})
 }}
 
-
+//
 
 //count all hp laptops
 

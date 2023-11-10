@@ -16,14 +16,20 @@ import Pagenotfound from "./404";
 import RegisterAdmin from "./components/admins/registrationadmin";
 import LoginAdmin from "./components/admins/loginadmin";
 import LoginAdminwithpasskey from "./components/admins/loginwithpasskey";
+import Validaterecoveryemailforadmins from "./components/admins/validateemail";
+import Resetpasswordadmins from "./components/admins/resetpassword";
+import Insertlaptop from "./components/admins/laptops admin/insert laptops";
 function App(){
   return(
     <div>
      <BrowserRouter>
      <Routes>
      <Route path="*" element={<Pagenotfound/>}/>
+     <Route path="/post/laptop" element={<Insertlaptop/>}/>
+     <Route path="/reset/password/admin" element={<Resetpasswordadmins/>}/>
      <Route path="/login/admin" element={<LoginAdmin/>}/>
      <Route path="/login/admin/passkey" element={<LoginAdminwithpasskey/>}/>
+     <Route path="/validate/email/admin" element={<Validaterecoveryemailforadmins/>}/>
      <Route path="/register/admin" element={<RegisterAdmin/>}/>
      <Route path="/lenovo/laptops" element={<Lenovolaptops/>}/>
      <Route path="/" element={<Navigationmenu/>}/> 
