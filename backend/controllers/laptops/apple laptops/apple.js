@@ -49,7 +49,7 @@ async function buyApplemacbookairgold(req, res) {
     // Make payment to instasend
     const response = await axios.post(
       "https://sandbox.intasend.com/api/v1/checkout/",
-      {
+      { 
         public_key: process.env.instasendpublic,
         amount: req.body.Totals,
       }
@@ -133,6 +133,7 @@ async function buyApplemacbookprom2(req, res) {
     return res.status(500).json({ error: `${error}` });
   }
 }
+//
 
 
 

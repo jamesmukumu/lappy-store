@@ -92,9 +92,9 @@ function Macbookprom2() {
         }
       );
 
-      if (response.data.message === "url fetched") {
+      if (response.data.message === "Url fetched") {
         setLoading(false);
-        setCheckouturl(response.data.data);
+        window.location.href = response.data.data;
       }
     } catch (error) {
       console.log(error);

@@ -42,24 +42,17 @@ async function fetchLenovoideapadprice(req, res) {
 //payment for lenovo idea pad
 async function buyLenovoideapad(req, res) {
   try {
-    // Fetch the price of the laptop from the backend
-    const priceResponse = await axios.get(
-      "http://localhost:7000/lenovo/ideapad/price"
-    );
-    const priceLaptop = priceResponse.data.data;
-
+    
     // Make payment to instasend
     const response = await axios.post(
       "https://sandbox.intasend.com/api/v1/checkout/",
       {
         public_key: process.env.instasendpublic,
-        amount: priceLaptop,
+        amount: req.body.Totals,
       }
     );
 
-    return res
-      .status(200)
-      .json({ message: "Url fetched", data: response.data.url });
+    return res.status(200).json({ message: "Url fetched", data: response.data.url });
   } catch (error) {
     return res.status(500).json({ error: `${error}` });
   }

@@ -175,6 +175,9 @@ function Navigationmenu() {
           <Link to="/lenovo/laptops" className="link">
             <li>Lenovo Laptops ({Nooflenovolaptops})</li>
           </Link>
+          <Link to="/nav/admin" className="link">
+            <li> ADMINS </li>
+          </Link>
         </ul>
       </div>
 

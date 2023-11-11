@@ -81,19 +81,25 @@ function HpelitebookG2() {
 
   async function buyMacbookairgold() {
     setLoading(true);
+   
     try {
       const response = await axios.post(
         "http://localhost:7000/buy/hp/elitebookg2",
-        { headers: { Authorization: token } },
+        
         {
           Totals: subTotal,
+        },
+        {
+          headers:{Authorization:token}
         }
+        
       );
 
       if (response.data.message === "Url fetched") {
+        setLoading(false);
         setTimeout(() => {
           window.location.href = response.data.data;
-          setLoading(false);
+          
         }, 10000);
       }
     } catch (error) {

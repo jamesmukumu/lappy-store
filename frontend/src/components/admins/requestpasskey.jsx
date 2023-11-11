@@ -11,22 +11,16 @@ function Requestotpbcnd() {
 
   async function fetchrecoveryEmail(e) {
     setLoading(true);
-//
+    //
     e.preventDefault();
 
     try {
-      const response = await axios.get(
-        "http://localhost:7000/request/otp",
-       {
-        params:{Email:recoveryemail}
-       }
-      );
-      if (
-        response.data.message === "Email found reset and otp sent"
-      ) {
+      const response = await axios.get("http://localhost:7000/request/otp", {
+        params: { Email: recoveryemail },
+      });
+      if (response.data.message === "Email found reset and otp sent") {
         setLoading(false);
-       
-       
+
         setScsmsg("otp sent check your email inbox");
       } else if (response.data.message === "No matching email") {
         setLoading(false);
@@ -69,4 +63,4 @@ function Requestotpbcnd() {
     </div>
   );
 }
-export default Requestotpbcnd
+export default Requestotpbcnd;
