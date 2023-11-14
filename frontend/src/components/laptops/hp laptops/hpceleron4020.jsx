@@ -6,7 +6,7 @@ import { FaMinus } from "react-icons/fa";
 import Cookie from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Preloader from "../../../preloader";
-function HpelitebookG2() {
+function Hpceleron4020() {
   const [loading, setLoading] = useState(false);
   const [Macbookairdata, setMacbookairdata] = useState([]);
   const [isVisible, setIsvisible] = useState(false);
@@ -22,7 +22,7 @@ function HpelitebookG2() {
       setLoading(true);
       try {
         const response = await axios.get(
-          "http://localhost:7000/hp/elitebookg2"
+          "http://localhost:7000/hp/celeron/4020"
         );
         if (response.data.message === "hp found") {
           setLoading(false);
@@ -48,7 +48,7 @@ function HpelitebookG2() {
     async function fetchMacbookairdataprice() {
       try {
         const response = await axios.get(
-          "http://localhost:7000/hp/elitebookg2/price",
+          "http://localhost:7000/hp/celeron4020/price",
           { headers: { Authorization: token } }
         );
         if (response.data.message === "Prices fetched") {
@@ -84,7 +84,7 @@ function HpelitebookG2() {
 
     try {
       const response = await axios.post(
-        "http://localhost:7000/buy/hp/elitebookg2",
+        "http://localhost:7000/buy/hp/celeron4020",
 
         {
           Totals: subTotal,
@@ -95,10 +95,11 @@ function HpelitebookG2() {
       );
 
       if (response.data.message === "Url fetched") {
-        setLoading(false);
+        
         setTimeout(() => {
+            setLoading(false);
           window.location.href = response.data.data;
-        }, 10000);
+        },1000);
       }
     } catch (error) {
       console.log(error);
@@ -223,4 +224,4 @@ function HpelitebookG2() {
   );
 }
 
-export default HpelitebookG2;
+export default Hpceleron4020;

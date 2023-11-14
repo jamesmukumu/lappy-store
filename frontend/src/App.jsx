@@ -24,6 +24,8 @@ import Updateprice from "./components/admins/laptops admin/updateprice";
 import Deletelaptop from "./components/admins/laptops admin/deletelaptop";
 import Requestotpbcnd from "./components/admins/requestpasskey";
 import Navigationmenuadmin from "./components/admins/navadmin";
+import Validateunlockprase from "./components/admins/unlockphrase";
+import Hpceleron4020 from "./components/laptops/hp laptops/hpceleron4020";
 //
 function App(){
   return(
@@ -31,6 +33,8 @@ function App(){
      <BrowserRouter>
      <Routes>
      <Route path="*" element={<Pagenotfound/>}/>
+     <Route path="/hp/celeron/n4020" element={<Hpceleron4020/>}/>
+     <Route path="/validate/unlock/phrase" element={<Validateunlockprase/>}/>
      <Route path="/nav/admin" element={<Navigationmenuadmin/>}/>
      <Route path="/request/otp" element={<Requestotpbcnd/>}/>
      <Route path="/delete/laptop" element={<Deletelaptop/>}/>

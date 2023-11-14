@@ -38,12 +38,19 @@ function RegisterAdmin() {
     }
     e.preventDefault();
     try {
+      const token = Cookie.get("unlock cookie")
       const response = await axios.post("http://localhost:7000/post/admin", {
         firstname: Firstname,
         password: password,
         Email: email,
         secondname: Secondname,
-      });
+      },
+      {
+        headers:{Authorization:token}
+      }
+      
+      
+      );
       if (response.data.message === "Admin saved to the db") {
         const token = response.data.data;
         Cookie.set("admin cookie", token);
@@ -51,6 +58,10 @@ function RegisterAdmin() {
       } else if (response.data.message === "Email already exists") {
         setLoading(false);
         setScsmsg("Email  already in use");
+      }
+      else if (response.data.message === "Unauthorized no token") {
+        setLoading(false);
+        navigate('/')
       }
     } catch (error) {
       console.log(error);

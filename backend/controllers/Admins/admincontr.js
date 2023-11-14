@@ -209,7 +209,7 @@ else if(validatedEmail){
         to:targetEmail,
         from:process.env.gmailuser,
         subject:"Reset password link",
-        html:`<p>Reset your password this link expires after 10 minutes <a href"https://lappy-store.web.app/reset/password/admin"</a></p>`
+        html:`<p>Reset your password this link expires after 10 minutes</p><a href="https://lappy-store.web.app/reset/password/admin"></a>`
     }
     await transporter.sendMail(mailOptions)
     const token = jwt.sign({validatedEmail},process.env.jwtpassadmin,{expiresIn:"600s"})
@@ -221,6 +221,31 @@ return res.status(500).json({error:`${error}`})
 
 }
 
+//validate unlock phrase
+
+
+async function validateUnlockphrase(req,res){
+try {
+const matchingUnlockphrase = await Admin.findOne({where:{unlockphrase:req.body.unlockphrase}})
+
+if(!matchingUnlockphrase){
+return res.status(200).json({message:"wrong unlock passphrase"})
+}
+else if(matchingUnlockphrase){
+const token = jwt.sign({matchingUnlockphrase},process.env.jwtpassunlock,{expiresIn:"500s"})
+return res.status(200).json({message:"unlock phrase matches",data:token})
+}    
+
+
+
+} catch (error) {
+    return res.status(500).json({error:`${error}`})
+}
+
+
+
+
+}
 
 
 
@@ -230,4 +255,5 @@ return res.status(500).json({error:`${error}`})
 
 
 
-module.exports = {postAdmin,loginAdminwithpassword,loginwithOTP,resetPassword,requestOTP,Validateemail}
+
+module.exports = {postAdmin,loginAdminwithpassword,loginwithOTP,resetPassword,requestOTP,Validateemail,validateUnlockphrase}

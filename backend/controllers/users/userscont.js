@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer")
 const dotenv = require("dotenv")
 dotenv.config()
 const jwt = require("jsonwebtoken")
-
+const nodecron = require("node-cron")
 
 
 
@@ -109,7 +109,7 @@ return res.status(200).json({message:"Email does Not exist"})
 else{
     const token = jwt.sign({matchingEmail},process.env.jwtpass,{expiresIn:"700s"})
 const mailOptions = {
-    to:recoveryEmail,
+    to:recoveryEmail, 
     from:process.env.gmailuser,
     subject:"Password Reset",
     html:'<p style="color:green;">Reset Your Password here this link is valid for <span style="color:red;">10 minutes</span> </p> <a href="https://lappy-store.web.app/reset/password">Reset Password</a>'
@@ -164,12 +164,14 @@ return res.status(200).json({error:"No emails to befetched"})
 else{
 const allTargetemails = allEmailsinthedb.map((users)=>users.Email)
 propagateEmails(req,res,allTargetemails)
+console.log("Emails sent")
+return res.status(200).json({message:"Emails found and message sent "})
 }
 
 
-return res.status(200).json({message:"Emails found and message sent "})
+
 } catch (error) {
-    
+    console.log(error)
 }
 }
 
@@ -180,7 +182,7 @@ const mailOptions = {
     to:allTargetemails.join(','),
     from:process.env.gmailuser,
     subject:"New laptop Deals",
-    html:"<p>New laptop deals available</p>"
+    html:"<p>New laptop deals available</p>"  
 
 }
 await transporter.sendMail(mailOptions)
@@ -192,9 +194,17 @@ await transporter.sendMail(mailOptions)
 
 
 
+// send mails to users 
+// nodecron.schedule('* * * * *', fetchAllemails); 
 
 
 
 
 
-module.exports = {postUser,loginClient,validateEmailforpasswordreset,updatePassword,fetchAllemails}
+
+
+
+
+  
+
+module.exports = {postUser,loginClient,validateEmailforpasswordreset,updatePassword,fetchAllemails} 

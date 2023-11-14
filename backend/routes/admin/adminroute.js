@@ -1,12 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const {postAdmin,loginAdminwithpassword,loginwithOTP,resetPassword,requestOTP,Validateemail} = require("../../controllers/Admins/admincontr")
+const {postAdmin,loginAdminwithpassword,loginwithOTP,resetPassword,requestOTP,Validateemail,validateUnlockphrase} = require("../../controllers/Admins/admincontr")
 const {validateTokenforadmins} = require("../../auth/jwtadmins")
-
-router.post("/post/admin",postAdmin)
+const {validateTokenforunlockpassphrase} = require("../../auth/jwtforunlockphrase")
+router.post("/post/admin",validateTokenforunlockpassphrase,postAdmin)
 router.post('/login/admin/password',loginAdminwithpassword)
 router.post('/login/with/otp',loginwithOTP)
 router.post('/validate/email/admin',Validateemail)
 router.put('/reset/password/admin',validateTokenforadmins,resetPassword)
 router.get('/request/otp',requestOTP)
+router.post('/post/unlock/phrase',validateUnlockphrase)
 module.exports = router

@@ -1,8 +1,8 @@
 const db = require("../../db/connection")
 const Sequelize = db.Sequelize
 const sequelize = db.sequelize
-
-
+const dotenv = require("dotenv")
+dotenv.config()
 
 const Admin = sequelize.define("Adminstable",{
 firstname:{
@@ -27,9 +27,9 @@ recoveryOTP:{
     unique:true,
     type:Sequelize.TEXT
 },
-companysPassphrase:{
+unlockphrase:{
     type:Sequelize.STRING,
-    defaultValue:"PJ 2022",
+    defaultValue:process.env.secretpass,
     allowNull:false
 }
 
